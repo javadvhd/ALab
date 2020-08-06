@@ -5,8 +5,16 @@ module IF_stage_reg (
 );
 
 always @(posedge clk) begin
-    PC <= PC_in;
-    instruction <=instruction_in;
+    
+    if(flush) begin
+        PC=32'd0;
+        instruction=32'd0;
+    end
+    else if(~freeze) begin
+        PC <= PC_in;
+        instruction <=instruction_in;
+    end
+
 end
     
 endmodule
