@@ -21,7 +21,7 @@ case (mode)
             4'b1101: exe_command = 4'b0001; //MOV
             4'b1111: exe_command = 4'b1001; //MVN
             4'b0100: exe_command = 4'b0010; //ADD
-            4'b1001: exe_command = 4'b0011; //ADC
+            4'b0101: exe_command = 4'b0011; //ADC
             4'b0010: exe_command = 4'b0100; //SUB
             4'b0110: exe_command = 4'b0101; //SBC
             4'b0000: exe_command = 4'b0110; //AND
@@ -37,11 +37,11 @@ case (mode)
         exe_command = 4'b0010;
         wb_enable = 1'b0;
         case (S)
-            1'b0 : begin
+            1'b1 : begin
                 mem_read = 1'b1;
                 mem_write = 1'b0;
             end 
-            1'b1 : begin
+            1'b0 : begin
                 mem_read =  1'b0;
                 mem_write =  1'b1;
             end  

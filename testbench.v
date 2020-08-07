@@ -7,8 +7,8 @@ module Arm_tb();
     initial repeat (500) #10 clk=~clk;
 
     initial begin
-        #5 rst=1;
-        #10 rst=0;
+        #2 rst=1;
+        #2 rst=0;
         
     end
 endmodule 
