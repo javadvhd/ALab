@@ -36,7 +36,7 @@ always @(posedge clk) begin
     exe_Signed_imm_24=24'b0;
     exe_Dest=4'bz;
     exe_status_reg=32'b0;
-    if (~flush) begin
+    if (~flush && ~rst) begin
         PC <= PC_in;
         {exe_WB_EN,exe_MEM_R_EN,exe_MEM_W_EN}<={id_WB_EN,id_MEM_R_EN,id_MEM_W_EN};
         exe_EXE_CMD<=id_EXE_CMD;
