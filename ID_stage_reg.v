@@ -1,7 +1,7 @@
 module ID_stage_reg (
     input clk, rst,flush,
     input [31:0] PC_in,
-    input id_WB_EN,id_MEM_R_EN,id_MEM_W_EN,
+    input id_WB_EN,id_MEM_R_EN,id_MEM_W_EN, is_immediate,
     input [3:0] id_EXE_CMD,
     input id_B,id_S,
     input [31:0] id_Val_Rn,id_Val_Rm,
@@ -10,7 +10,7 @@ module ID_stage_reg (
     input [23:0] id_Signed_imm_24,
     input [3:0] id_Dest,
     input [31:0] id_status_reg,
-    output reg exe_WB_EN,exe_MEM_R_EN,exe_MEM_W_EN,
+    output reg exe_WB_EN,exe_MEM_R_EN,exe_MEM_W_EN,immediate
     output reg [3:0] exe_EXE_CMD,
     output reg exe_B,exe_S,
     output reg [31:0] PC,exe_Val_Rn,exe_Val_Rm,
@@ -36,6 +36,7 @@ always @(posedge clk) begin
     exe_Signed_imm_24=24'b0;
     exe_Dest=4'bz;
     exe_status_reg=32'b0;
+    immediate = 1'b0;
     if (~flush && ~rst) begin
         PC <= PC_in;
         {exe_WB_EN,exe_MEM_R_EN,exe_MEM_W_EN}<={id_WB_EN,id_MEM_R_EN,id_MEM_W_EN};
@@ -47,6 +48,7 @@ always @(posedge clk) begin
         exe_Signed_imm_24<=id_Signed_imm_24;
         exe_Dest<=id_Dest;
         exe_status_reg<=id_status_reg;
+        immediate <=  is_immediate;
     end
 end
 

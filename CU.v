@@ -1,7 +1,7 @@
 module CU (
     input [1:0]mode,
     input [3:0]op_code,
-    input S,
+    input S, immediate
     output reg [3:0] exe_command,
     output reg mem_read, mem_write,
     output reg wb_enable,
@@ -10,6 +10,7 @@ module CU (
     output update_status
 );
 assign update_status = S;
+assign is_immediate = immediate;
 always @(*) begin
 case (mode)
     2'd0: begin
