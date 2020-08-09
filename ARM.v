@@ -23,7 +23,7 @@ wire [3:0] exe_reg_dest_out;
 wire [31:0] exe_reg_alu_res, exe_reg_val_rm;
 wire mem_reg_wb_en, mem_reg_mem_read;
 wire [3:0] mem_reg_dest_out;
-wire [31:0] mem_reg_alu_out;
+wire [31:0] mem_reg_alu_out, data_mem_out, mem_reg_data_mem_out;
 wire [31:0] wb_result;
 wire [3:0] wb_dest;
 wire [31:0] status_reg_out;
@@ -56,11 +56,13 @@ Status_register s_reg(clk, rst, id_reg_S, exe_status_bits, status_reg_out);
 EXE_stage_reg EXE_reg(clk, rst, exe_wb_en, exe_mem_read, exe_mem_write, 
     exe_dest, exe_alu_res, exe_val_rm_out, exe_reg_wb_out, exe_reg_mem_read, 
     exe_reg_mem_write, exe_reg_dest_out, exe_reg_alu_res, exe_reg_val_rm);
-// MEM_stage MEM(clk, rst, exe_reg_pc_out, mem_pc_out);
+MEM_stage MEM(clk, exe_reg_mem_read, exe_reg_mem_write, exe_reg_alu_res, exe_reg_val_rm, data_mem_out);
+
 MEM_stage_reg MEM_reg(clk, rst, exe_reg_mem_read, exe_reg_wb_out,exe_reg_dest_out,
-    exe_reg_alu_res, mem_reg_wb_en, mem_reg_mem_read, mem_reg_dest_out, mem_reg_alu_out);
+    exe_reg_alu_res,data_mem_out, mem_reg_wb_en, mem_reg_mem_read, mem_reg_dest_out, 
+    mem_reg_alu_out, mem_reg_data_mem_out);
 
 WB_stage WB(mem_reg_wb_en, mem_reg_mem_read, mem_reg_dest_out, mem_reg_alu_out, 
-    32'b0, wb_wb_en, wb_dest, wb_result);
+    mem_reg_data_mem_out, wb_wb_en, wb_dest, wb_result);
     
 endmodule
