@@ -1,6 +1,7 @@
 module ID_stage (
     input clk, rst,hazard, wb_wb_enable,
-    input [31:0] status_reg_out, wb_dest,
+    input [31:0] status_reg_out,
+    input [3:0] wb_dest,
     input [31:0] PC_in, insruction, wb_result,
     output [31:0] PC,
     output two_src, wb_en, mem_read_en, mem_write_en, S, B, is_immediate,

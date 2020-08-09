@@ -18,7 +18,7 @@ wire [31:0] id_reg_Val_Rn,id_reg_Val_Rm,id_reg_status_reg;
 wire exe_wb_en, exe_mem_read, exe_mem_write; 
 wire [3:0] exe_dest, exe_status_bits;
 wire [31:0] exe_branch_address, exe_alu_res, exe_val_rm_out;
-wire exe_reg_wb_out, exe_reg_mem_read, exe_reg_mem_write, 
+wire exe_reg_wb_out, exe_reg_mem_read, exe_reg_mem_write;
 wire [3:0] exe_reg_dest_out;
 wire [31:0] exe_reg_alu_res, exe_reg_val_rm;
 wire mem_reg_wb_en, mem_reg_mem_read;

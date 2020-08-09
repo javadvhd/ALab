@@ -3,7 +3,7 @@ module ID_stage (
     input [31:0] status_reg_out, wb_dest,
     input [31:0] PC_in, insruction, wb_result,
     output [31:0] PC,
-    output two_src, wb_en, mem_read_en, mem_write_en, S, B, is_immediate
+    output two_src, wb_en, mem_read_en, mem_write_en, S, B, is_immediate,
     output [3:0] exe_command,
     output [31:0] val_rn, val_rm,
     output [7:0] imm_8,

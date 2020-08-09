@@ -4,7 +4,7 @@ module WB_stage (
     input [31:0] alu, data_memory,
     output wb_en_out,
     output [3:0] dest_out,
-    output [31:0] value
+    output [31:0] value,
 );
 
 assign wb_en_out = wb_en ;  

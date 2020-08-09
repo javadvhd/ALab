@@ -4,7 +4,7 @@ module EXE_stage_reg (
     input [31:0] alu_res, val_rm, 
     output reg wb_out, mem_read_out, mem_write_out, 
     output reg [3:0] dest_out,
-    output reg [31:0] alu_res_out, val_rm_out
+    output reg [31:0] alu_res_out, val_rm_out,
 );
 
 always @(posedge clk, posedge rst) begin
