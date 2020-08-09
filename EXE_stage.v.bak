@@ -6,7 +6,7 @@ module EXE_stage (
     input [31:0] PC_in, val_rn,val_rm, status_reg_out,
     output wb_en_out, mem_read_out, mem_write_out,
     output [3:0] dest_out, status_bits_out,
-    output [31:0] branch_address, alu_res, val_rm_out
+    output [31:0] branch_address, alu_res, val_rm_out,
 );
 
 wire [31:0] val2_generator_out;

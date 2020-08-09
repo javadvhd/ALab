@@ -15,8 +15,8 @@ wire [3:0] id_reg_EXE_CMD,id_reg_rotate_imm,id_reg_Dest;
 wire [7:0] id_reg_immed_8;
 wire [23:0] id_reg_Signed_imm_24;
 wire [31:0] id_reg_Val_Rn,id_reg_Val_Rm,id_reg_status_reg;
-wire exe_wb_en, exe_mem_read, exe_mem_write, 
-wire [3:0] exe_dest, exe_status_bits, 
+wire exe_wb_en, exe_mem_read, exe_mem_write; 
+wire [3:0] exe_dest, exe_status_bits;
 wire [31:0] exe_pc_out, exe_reg_pc_out, exe_branch_address, exe_alu_res, exe_val_rm_out;
 wire [31:0] mem_pc_out, mem_reg_pc_out;
 wire [31:0] wb_pc_out, wb_result;

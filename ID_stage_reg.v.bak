@@ -10,7 +10,7 @@ module ID_stage_reg (
     input [23:0] id_Signed_imm_24,
     input [3:0] id_Dest,
     input [31:0] id_status_reg,
-    output reg exe_WB_EN,exe_MEM_R_EN,exe_MEM_W_EN,immediate,
+    output reg exe_WB_EN,exe_MEM_R_EN,exe_MEM_W_EN,immediate
     output reg [3:0] exe_EXE_CMD,
     output reg exe_B,exe_S,
     output reg [31:0] PC,exe_Val_Rn,exe_Val_Rm,

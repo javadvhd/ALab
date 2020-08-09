@@ -6,7 +6,7 @@ module ALU (
     output reg signed [31:0]  alu_res
 );
 
-reg Z_, N, V, C;
+wire Z_, N, V, C;
 
 always @(*) begin
     case (exe_command)

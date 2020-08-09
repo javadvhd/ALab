@@ -5,7 +5,7 @@ module CU (
     output reg [3:0] exe_command,
     output reg mem_read, mem_write,
     output reg wb_enable,
-    output is_immediate,
+    output reg is_immediate,
     output reg B,
     output update_status
 );
