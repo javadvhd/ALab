@@ -17,21 +17,23 @@ wire [23:0] id_reg_Signed_imm_24;
 wire [31:0] id_reg_Val_Rn,id_reg_Val_Rm,id_reg_status_reg;
 wire exe_wb_en, exe_mem_read, exe_mem_write; 
 wire [3:0] exe_dest, exe_status_bits;
-wire [31:0] exe_pc_out, exe_reg_pc_out, exe_branch_address, exe_alu_res, exe_val_rm_out;
-wire [31:0] mem_pc_out, mem_reg_pc_out;
-wire [31:0] wb_pc_out, wb_result;
+wire [31:0] exe_branch_address, exe_alu_res, exe_val_rm_out;
+wire exe_reg_wb_out, exe_reg_mem_read, exe_reg_mem_write, 
+wire [3:0] exe_reg_dest_out;
+wire [31:0] exe_reg_alu_res, exe_reg_val_rm;
+wire mem_reg_wb_en, mem_reg_mem_read;
+wire [3:0] mem_reg_dest_out;
+wire [31:0] mem_reg_alu_out;
+wire [31:0] wb_result;
 wire [3:0] wb_dest;
 wire [31:0] status_reg_out;
 
 assign freeze = 1'd0;
-assign wb_wb_en=1'b0;
-assign hazard = 1'b0;
-assign branch_taken = 1'd0;
-assign branch_address = 32'd0;
-assign flush=1'd0;
-assign status_reg_out={4'b0,28'b0};
 
-IF_stage IF(clk, rst, freeze, branch_taken, branch_address, if_pc_out, if_instruction_out);
+assign hazard = 1'b0;
+assign flush=1'd0;
+
+IF_stage IF(clk, rst, freeze, id_reg_B, exe_branch_address, if_pc_out, if_instruction_out);
 IF_stage_reg IF_reg(clk, rst, freeze,flush ,if_pc_out, if_instruction_out, if_reg_pc_out,
  if_reg_instruction_out);
 ID_stage ID(clk, rst, hazard, wb_wb_en, status_reg_out, wb_dest, if_reg_pc_out, if_reg_instruction_out,
@@ -49,9 +51,16 @@ EXE_stage EXE(clk, rst,id_reg_WB_EN,id_reg_MEM_R_EN,id_reg_MEM_W_EN,id_reg_immed
     id_reg_pc_out, id_reg_Val_Rn, id_reg_Val_Rm, id_reg_status_reg,
     exe_wb_en, exe_mem_read, exe_mem_write, exe_dest, exe_status_bits, exe_branch_address, exe_alu_res, exe_val_rm_out );
 
-EXE_stage_reg EXE_reg(clk, rst, exe_pc_out, exe_reg_pc_out);
-MEM_stage MEM(clk, rst, exe_reg_pc_out, mem_pc_out);
-MEM_stage_reg MEM_reg(clk, rst, mem_pc_out, mem_reg_pc_out);
-WB_stage WB(clk, rst, mem_reg_pc_out, wb_pc_out);
+Status_register s_reg(clk, rst, id_reg_S, exe_status_bits, status_reg_out);
+
+EXE_stage_reg EXE_reg(clk, rst, exe_wb_en, exe_mem_read, exe_mem_write, 
+    exe_dest, exe_alu_res, exe_val_rm_out, exe_reg_wb_out, exe_reg_mem_read, 
+    exe_reg_mem_write, exe_reg_dest_out, exe_reg_alu_res, exe_reg_val_rm);
+// MEM_stage MEM(clk, rst, exe_reg_pc_out, mem_pc_out);
+MEM_stage_reg MEM_reg(clk, rst, exe_reg_mem_read, exe_reg_wb_out,exe_reg_dest_out,
+    exe_reg_alu_res, mem_reg_wb_en, mem_reg_mem_read, mem_reg_dest_out, mem_reg_alu_out);
+
+WB_stage WB(mem_reg_wb_en, mem_reg_mem_read, mem_reg_dest_out, mem_reg_alu_out, 
+    32'b0, wb_wb_en, wb_dest, wb_result);
     
 endmodule
