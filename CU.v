@@ -28,21 +28,23 @@ case (mode)
             4'b0000: exe_command = 4'b0110; //AND
             4'b1100: exe_command = 4'b0111; //ORR
             4'b0001: exe_command = 4'b1000; //EOR
-            4'b1010: exe_command = 4'b0100; //CMP
-            4'b1000: exe_command = 4'b0110; //TST
+            4'b1010: {exe_command,wb_enable}= {4'b0100,1'b0}; //CMP
+            4'b1000: {exe_command,wb_enable} = {4'b0110,1'b0}; //TST
             default:exe_command = 4'b0000; //NOP
         endcase
     end
     2'd1: begin
         B=1'b0;
         exe_command = 4'b0010;
-        wb_enable = 1'b0;
+        
         case (S)
             1'b1 : begin
+                wb_enable = 1'b1;
                 mem_read = 1'b1;
                 mem_write = 1'b0;
             end 
             1'b0 : begin
+                wb_enable = 1'b0;
                 mem_read =  1'b0;
                 mem_write =  1'b1;
             end  

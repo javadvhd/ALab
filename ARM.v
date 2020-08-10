@@ -45,7 +45,7 @@ ID_stage ID(clk, rst, hazard, wb_wb_en, status_reg_out, wb_dest, if_reg_pc_out, 
 
 
 Hazard_detection hd(
-    exe_wb_en, exe_reg_wb_out, id_two_src
+    exe_wb_en, exe_reg_wb_out, id_two_src,
     if_reg_instruction_out[19:16], id_src2, exe_dest, exe_reg_dest_out, hazard
 );
 

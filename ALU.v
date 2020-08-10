@@ -15,7 +15,7 @@ always @(*) begin
         4'b0010: {C, alu_res} = val1 + val2; //ADD
         4'b0011: {C, alu_res} = val1 + val2 + {31'b0,status_reg_out[29]}; //ADC
         4'b0100: {C, alu_res} = val1 - val2; //SUB
-        4'b0101: {C, alu_res} = val1 - val2 - 1; //SBC
+        4'b0101: {C, alu_res} = val1 - val2 -  {31'b0,status_reg_out[29]}; //SBC
         4'b0110: alu_res = val1 & val2; //AND
         4'b0111: alu_res = val1 | val2; //ORR
         4'b1000: alu_res = val1 ^ val2; //EOR

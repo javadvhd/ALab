@@ -6,11 +6,11 @@ module Data_memory (
 reg [31:0] memory [0:63];
 
 
-assign value = mem_read ? memory[(((alu_res - 32'd1024) >> 2) << 2)]: 32'bx;
+assign value = mem_read ? memory[(((alu_res - 32'd1024) >> 2))]: 32'bx;
 
 always @(posedge clk) begin
     if (mem_write) begin
-        memory[alu_res - 32'd1024] = val_rm; 
+        memory[(alu_res - 32'd1024)>>2] = val_rm; 
     end
 end
     

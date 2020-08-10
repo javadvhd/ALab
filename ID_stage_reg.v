@@ -21,7 +21,7 @@ module ID_stage_reg (
     output reg [31:0] exe_status_reg
 );
     
-always @(posedge clk) begin
+always @(posedge clk,posedge rst) begin
     exe_WB_EN=1'b0;
     exe_MEM_R_EN=1'b0;
     exe_MEM_W_EN=1'b0;

@@ -4,9 +4,9 @@ module IF_stage_reg (
     output reg [31:0] PC, instruction 
 );
 
-always @(posedge clk) begin
+always @(posedge clk,posedge rst) begin
     
-    if(flush) begin
+    if(flush || rst) begin
         PC=32'd0;
         instruction=32'd0;
     end

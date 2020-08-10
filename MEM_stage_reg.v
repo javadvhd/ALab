@@ -6,7 +6,7 @@ module MEM_stage_reg (
     output reg wb_en_out, mem_read_out, 
     output reg [3:0] dest_out,  
     output reg [31:0] alu_out,
-    output reg [31:0] data_memory_out, 
+    output reg [31:0] data_memory_out
 
 );
     
