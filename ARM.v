@@ -4,7 +4,7 @@ module ARM (
 
 wire freeze, branch_taken,flush, hazard, wb_wb_en;
 wire id_two_src, id_wb_en, id_mem_read_en, id_mem_write_en, id_S, id_B, id_is_immediate; 
-wire [3:0] id_exe_command, id_rotate_imm, id_dest;
+wire [3:0] id_exe_command, id_rotate_imm, id_dest, id_src2;
 wire [7:0] id_imm_8;
 wire [23:0] id_signed_imm;
 wire [31:0] branch_address;
@@ -28,18 +28,28 @@ wire [31:0] wb_result;
 wire [3:0] wb_dest;
 wire [31:0] status_reg_out;
 
-assign freeze = 1'd0;
+assign freeze = hazard;
 
-assign hazard = 1'b0;
-assign flush=1'd0;
+
+assign flush= id_reg_B;
 
 IF_stage IF(clk, rst, freeze, id_reg_B, exe_branch_address, if_pc_out, if_instruction_out);
+
 IF_stage_reg IF_reg(clk, rst, freeze,flush ,if_pc_out, if_instruction_out, if_reg_pc_out,
  if_reg_instruction_out);
+
 ID_stage ID(clk, rst, hazard, wb_wb_en, status_reg_out, wb_dest, if_reg_pc_out, if_reg_instruction_out,
  wb_result, id_pc_out, id_two_src, id_wb_en, id_mem_read_en, id_mem_write_en, id_S, id_B, 
  id_is_immediate, id_exe_command, 
- id_val_rn, id_val_rm, id_imm_8, id_rotate_imm, id_signed_imm, id_dest);
+ id_val_rn, id_val_rm, id_imm_8, id_rotate_imm, id_signed_imm, id_dest, id_src2);
+
+
+Hazard_detection hd(
+    exe_wb_en, exe_reg_wb_out, id_two_src
+    if_reg_instruction_out[19:16], id_src2, exe_dest, exe_reg_dest_out, hazard
+);
+
+
 
 ID_stage_reg ID_reg(clk, rst,flush, id_pc_out,id_wb_en,id_mem_read_en ,id_mem_write_en,id_is_immediate ,
     id_exe_command,id_B,id_S,id_val_rn,id_val_rm,id_imm_8,id_rotate_imm,id_signed_imm

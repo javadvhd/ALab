@@ -5,8 +5,7 @@ module IF_stage (
 );
 
 wire [31:0] pc_in;
-assign pc_in = pc + 32'd4;
-
+assign pc_in = branch_taken ? branch_address : pc + 32'd4;
 
 IM im(clk, pc, instruction);
 PC_reg PC(clk, rst, freeze, pc_in,pc);

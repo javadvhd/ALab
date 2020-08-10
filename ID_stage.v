@@ -10,10 +10,9 @@ module ID_stage (
     output [7:0] imm_8,
     output [3:0] rotate_imm,
     output [23:0] signed_imm,
-    output [3:0] dest
+    output [3:0] dest, src2
 );
 
-wire [3:0] src2;
 wire cu_S,cu_B, cu_mem_write_en, cu_mem_read_en, cu_wb_en,
  cu_is_immediate, c_check_out, control_sig_selector;
 wire [3:0] cu_exe_command; 
