@@ -4,10 +4,6 @@ module Hazard_detection (
     output reg hazard_output
 );
 
-
-//assign hazard_output = (exe_wb_en && (src1 == exe_dest)) || (mem_wb_en && (src1 == mem_dest)) || 
-  //  (two_src && exe_wb_en && (src2 == exe_dest)) || (two_src && mem_wb_en && (src2 == mem_dest));
-
 always @(*) begin
     if(exe_wb_en)
         hazard_output=(src1 == exe_dest);
