@@ -7,7 +7,7 @@ module Status_register (
 always @(negedge clk, posedge rst) begin
     if (rst) begin
         status_reg_out = 32'b0;
-    end else begin
+    end else if(S) begin
         status_reg_out[31:28] = status_bits;
     end
 end
