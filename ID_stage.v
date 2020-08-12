@@ -10,7 +10,7 @@ module ID_stage (
     output [7:0] imm_8,
     output [3:0] rotate_imm,
     output [23:0] signed_imm,
-    output [3:0] dest, src2
+    output [3:0] dest, scr1,src2
 );
 
 wire cu_S,cu_B, cu_mem_write_en, cu_mem_read_en, cu_wb_en,
@@ -24,8 +24,8 @@ assign imm_8 = insruction[7:0];
 assign rotate_imm = insruction[11:8];
 assign signed_imm = insruction[23:0];
 assign dest = insruction[15:12];
-
-RegisterFile RF(clk, rst, insruction[19:16], src2, wb_dest,wb_result,wb_wb_enable,val_rn, val_rm);
+assign scr1=insruction[19:16];
+RegisterFile RF(clk, rst, scr1, src2, wb_dest,wb_result,wb_wb_enable,val_rn, val_rm);
 
 CU cu(insruction[27:26], insruction[24:21], insruction[20], insruction[25], cu_exe_command, cu_mem_read_en, cu_mem_write_en,
  cu_wb_en, cu_is_immediate, cu_B, cu_S);
