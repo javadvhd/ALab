@@ -8,6 +8,5 @@ Data_memory DM(
     val_rm, alu_res,
     data_mem_out
 );    
-// assign PC = PC_in;
 
 endmodule
