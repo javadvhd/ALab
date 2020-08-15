@@ -1,10 +1,10 @@
 
 
 module Arm_tb();
-    reg clk=0,rst=0,forward=0;
+    reg clk=0,rst=0,forward=1;
     ARM m(clk,rst,forward);
 
-    initial repeat (500) #10 clk=~clk;
+    initial repeat (5000) #10 clk=~clk;
 
     initial begin
         #2 rst=1;
