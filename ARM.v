@@ -79,7 +79,7 @@ EXE_stage EXE(clk, rst,id_reg_WB_EN,id_reg_MEM_R_EN,id_reg_MEM_W_EN,id_reg_immed
 Status_register s_reg(clk, rst, id_reg_S, exe_status_bits, status_reg_out);
 
 EXE_stage_reg EXE_reg(clk, rst, exe_wb_en, exe_mem_read, exe_mem_write, 
-    exe_dest, exe_alu_res, exe_val_rm_out, exe_reg_wb_out, exe_reg_mem_read, 
+    exe_dest, exe_alu_res, mux2_val, exe_reg_wb_out, exe_reg_mem_read, 
     exe_reg_mem_write, exe_reg_dest_out, exe_reg_alu_res, exe_reg_val_rm);
 MEM_stage MEM(clk, exe_reg_mem_read, exe_reg_mem_write, exe_reg_alu_res, exe_reg_val_rm, data_mem_out);
 
